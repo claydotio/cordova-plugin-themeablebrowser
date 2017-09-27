@@ -1379,12 +1379,11 @@ public class ThemeableBrowser extends CordovaPlugin {
                 newloc = "http://" + url;
             }
 
-            // Update the UI if we haven't already
-            if (!newloc.equals(edittext.getText().toString())) {
-                edittext.setText(newloc);
-            }
-
             try {
+                // Update the UI if we haven't already
+                if (!newloc.equals(edittext.getText().toString())) {
+                    edittext.setText(newloc);
+                }
                 JSONObject obj = new JSONObject();
                 obj.put("type", LOAD_START_EVENT);
                 obj.put("url", newloc);

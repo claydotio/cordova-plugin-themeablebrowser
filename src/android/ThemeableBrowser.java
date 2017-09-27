@@ -857,7 +857,7 @@ public class ThemeableBrowser extends CordovaPlugin {
 
                 inAppWebView.loadUrl(url);
                 inAppWebView.getSettings().setLoadWithOverviewMode(true);
-                inAppWebView.getSettings().setUseWideViewPort(true);
+                inAppWebView.getSettings().setUseWideViewPort(false);
                 inAppWebView.requestFocus();
                 inAppWebView.requestFocusFromTouch();
 

@@ -674,9 +674,13 @@ public class ThemeableBrowser extends CordovaPlugin {
                     "close button",
                     new View.OnClickListener() {
                         public void onClick(View v) {
-                            emitButtonEvent(
+                            try {
+                                emitButtonEvent(
                                     features.closeButton,
                                     inAppWebView.getUrl());
+                            } catch (NullPointerException ex) {
+                                Log.e(LOG_TAG, "NullPointer err.");
+                            }
                             closeDialog();
                         }
                     }
@@ -1379,6 +1383,7 @@ public class ThemeableBrowser extends CordovaPlugin {
                 newloc = "http://" + url;
             }
 
+
             try {
                 // Update the UI if we haven't already
                 if (!newloc.equals(edittext.getText().toString())) {
@@ -1390,6 +1395,8 @@ public class ThemeableBrowser extends CordovaPlugin {
                 sendUpdate(obj, true);
             } catch (JSONException ex) {
                 Log.e(LOG_TAG, "URI passed in has caused a JSON error.");
+            } catch (NullPointerException ex) {
+                Log.e(LOG_TAG, "NullPointer err.");
             }
         }
 

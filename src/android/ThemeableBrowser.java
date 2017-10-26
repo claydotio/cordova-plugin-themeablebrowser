@@ -843,6 +843,17 @@ public class ThemeableBrowser extends CordovaPlugin {
                 settings.setDisplayZoomControls(false);
                 settings.setPluginState(android.webkit.WebSettings.PluginState.ON);
 
+                String overrideUserAgent = preferences.getString("OverrideUserAgent", null);
+
+                if (overrideUserAgent != null) {
+                    settings.setUserAgentString(overrideUserAgent);
+                } else {
+                    String appendUserAgent = preferences.getString("AppendUserAgent", null);
+                    if (appendUserAgent != null) {
+                        settings.setUserAgentString(settings.getUserAgentString() + appendUserAgent + "/InAppBrowser");
+                    }
+                }
+
                 //Toggle whether this is enabled or not!
                 Bundle appSettings = cordova.getActivity().getIntent().getExtras();
                 boolean enableDatabase = appSettings == null || appSettings.getBoolean("ThemeableBrowserStorageEnabled", true);

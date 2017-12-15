@@ -149,30 +149,31 @@ public class ThemeableBrowser extends CordovaPlugin {
                          * responsibility has been moved to the plugins, with an aggregating method in
                          * PluginManager.
                          */
-                        Boolean shouldAllowNavigation = null;
-                        if (url.startsWith("javascript:")) {
-                            shouldAllowNavigation = true;
-                        }
-                        if (shouldAllowNavigation == null) {
-                            shouldAllowNavigation = new Whitelist().isUrlWhiteListed(url);
-                        }
-                        if (shouldAllowNavigation == null) {
-                            try {
-                                Method gpm = webView.getClass().getMethod("getPluginManager");
-                                PluginManager pm = (PluginManager)gpm.invoke(webView);
-                                Method san = pm.getClass().getMethod("shouldAllowNavigation", String.class);
-                                shouldAllowNavigation = (Boolean)san.invoke(pm, url);
-                            } catch (NoSuchMethodException e) {
-                            } catch (IllegalAccessException e) {
-                            } catch (InvocationTargetException e) {
-                            }
-                        }
+                        // Boolean shouldAllowNavigation = null;
+                        // if (url.startsWith("javascript:")) {
+                        //     shouldAllowNavigation = true;
+                        // }
+                        // if (shouldAllowNavigation == null) {
+                        //     shouldAllowNavigation = new Whitelist().isUrlWhiteListed(url);
+                        // }
+                        // if (shouldAllowNavigation == null) {
+                        //     try {
+                        //         Method gpm = webView.getClass().getMethod("getPluginManager");
+                        //         PluginManager pm = (PluginManager)gpm.invoke(webView);
+                        //         Method san = pm.getClass().getMethod("shouldAllowNavigation", String.class);
+                        //         shouldAllowNavigation = (Boolean)san.invoke(pm, url);
+                        //     } catch (NoSuchMethodException e) {
+                        //     } catch (IllegalAccessException e) {
+                        //     } catch (InvocationTargetException e) {
+                        //     }
+                        // }
                         // load in webview
-                        if (Boolean.TRUE.equals(shouldAllowNavigation)) {
-                            webView.loadUrl(url);
-                        }
+                        // if (Boolean.TRUE.equals(shouldAllowNavigation)) {
+                        //     webView.loadUrl(url);
+                        // }
                         //Load the dialer
-                        else if (url.startsWith(WebView.SCHEME_TEL))
+                        // else
+                        if (url.startsWith(WebView.SCHEME_TEL))
                         {
                             try {
                                 Intent intent = new Intent(Intent.ACTION_DIAL);
